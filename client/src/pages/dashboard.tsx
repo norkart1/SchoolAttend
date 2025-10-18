@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import {
   People,
-  PersonCheck,
+  HowToReg,
   Schedule,
   TrendingUp,
   TrendingDown,
@@ -91,7 +91,7 @@ export default function Dashboard() {
     {
       title: "Present Today",
       value: stats.presentToday,
-      icon: PersonCheck,
+      icon: HowToReg,
       color: "text-chart-2",
       testId: "stat-present-today",
     },

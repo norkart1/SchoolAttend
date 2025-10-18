@@ -9,7 +9,11 @@ import { fromZodError } from "zod-validation-error";
 import { db } from "./db";
 import { sql } from "drizzle-orm";
 
-const JWT_SECRET = process.env.JWT_SECRET || "school-attendance-jwt-secret-change-in-production";
+if (!process.env.JWT_SECRET) {
+  throw new Error("JWT_SECRET must be set. Please provide a secure JWT secret.");
+}
+
+const JWT_SECRET = process.env.JWT_SECRET;
 const JWT_EXPIRES_IN = "24h";
 
 interface JWTPayload {
