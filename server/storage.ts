@@ -149,14 +149,26 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createLeaveRecord(leave: InsertLeaveRecord): Promise<LeaveRecord> {
-    const [created] = await db.insert(leaveRecords).values(leave).returning();
+    const leaveData = {
+      ...leave,
+      leaveDate: typeof leave.leaveDate === 'string' ? new Date(leave.leaveDate) : leave.leaveDate,
+      returnDate: leave.returnDate ? (typeof leave.returnDate === 'string' ? new Date(leave.returnDate) : leave.returnDate) : null,
+    };
+    const [created] = await db.insert(leaveRecords).values(leaveData).returning();
     return created;
   }
 
   async updateLeaveRecord(id: number, data: Partial<InsertLeaveRecord>): Promise<LeaveRecord | undefined> {
+    const updateData: any = { ...data };
+    if (data.leaveDate && typeof data.leaveDate === 'string') {
+      updateData.leaveDate = new Date(data.leaveDate);
+    }
+    if (data.returnDate && typeof data.returnDate === 'string') {
+      updateData.returnDate = new Date(data.returnDate);
+    }
     const [updated] = await db
       .update(leaveRecords)
-      .set(data)
+      .set(updateData)
       .where(eq(leaveRecords.id, id))
       .returning();
     return updated || undefined;

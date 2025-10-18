@@ -28,18 +28,18 @@ interface DashboardStats {
   totalStudents: number;
   presentToday: number;
   onLeaveToday: number;
-  attendanceRate: number;
+  attendanceRate: number | string;
   topPerformers: Array<{
     id: number;
     name: string;
     profileImage: string | null;
-    attendanceRate: number;
+    attendanceRate: number | string;
   }>;
   lowAttendance: Array<{
     id: number;
     name: string;
     profileImage: string | null;
-    attendanceRate: number;
+    attendanceRate: number | string;
   }>;
   weeklyTrend: Array<{
     day: string;
@@ -48,12 +48,18 @@ interface DashboardStats {
   }>;
   monthlyStats: Array<{
     month: string;
-    rate: number;
+    rate: number | string;
   }>;
 }
 
+function safeNumber(value: any): number {
+  if (value == null) return 0;
+  const num = typeof value === 'number' ? value : parseFloat(value);
+  return Number.isFinite(num) ? num : 0;
+}
+
 export default function Dashboard() {
-  const { data: stats, isLoading } = useQuery<DashboardStats>({
+  const { data: stats, isLoading} = useQuery<DashboardStats>({
     queryKey: ["/api/dashboard/stats"],
   });
 
@@ -104,7 +110,7 @@ export default function Dashboard() {
     },
     {
       title: "Attendance Rate",
-      value: `${stats.attendanceRate.toFixed(1)}%`,
+      value: `${safeNumber(stats.attendanceRate).toFixed(1)}%`,
       icon: TrendingUp,
       color: "text-chart-1",
       testId: "stat-attendance-rate",
@@ -236,11 +242,11 @@ export default function Dashboard() {
                     <div className="flex-1">
                       <p className="font-medium">{student.name}</p>
                       <p className="text-sm text-muted-foreground">
-                        Attendance: {student.attendanceRate.toFixed(1)}%
+                        Attendance: {safeNumber(student.attendanceRate).toFixed(1)}%
                       </p>
                     </div>
                     <Badge variant="secondary" className="bg-chart-2/10 text-chart-2">
-                      {student.attendanceRate.toFixed(0)}%
+                      {safeNumber(student.attendanceRate).toFixed(0)}%
                     </Badge>
                   </div>
                 ))
@@ -282,11 +288,11 @@ export default function Dashboard() {
                     <div className="flex-1">
                       <p className="font-medium">{student.name}</p>
                       <p className="text-sm text-muted-foreground">
-                        Attendance: {student.attendanceRate.toFixed(1)}%
+                        Attendance: {safeNumber(student.attendanceRate).toFixed(1)}%
                       </p>
                     </div>
                     <Badge variant="secondary" className="bg-chart-5/10 text-chart-5">
-                      {student.attendanceRate.toFixed(0)}%
+                      {safeNumber(student.attendanceRate).toFixed(0)}%
                     </Badge>
                   </div>
                 ))

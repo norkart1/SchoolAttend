@@ -87,6 +87,8 @@ export const insertLeaveRecordSchema = createInsertSchema(leaveRecords).omit({
   id: true,
   createdAt: true,
 }).extend({
+  leaveDate: z.string().or(z.date()),
+  returnDate: z.string().or(z.date()).nullable().optional(),
   leaveReason: z.string().min(5, "Reason must be at least 5 characters"),
   status: z.enum(["on_leave", "returned"]).default("on_leave"),
 });
