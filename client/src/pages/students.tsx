@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
 import type { Student } from "@shared/schema";
 
 export default function StudentsPage() {
@@ -18,8 +17,7 @@ export default function StudentsPage() {
 
   const filteredStudents = students?.filter((student) =>
     student.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    student.phone.includes(searchQuery) ||
-    student.grade?.toLowerCase().includes(searchQuery.toLowerCase())
+    student.phone.includes(searchQuery)
   );
 
   if (isLoading) {
@@ -62,7 +60,7 @@ export default function StudentsPage() {
       <div className="relative">
         <Search sx={{ fontSize: 16 }} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
         <Input
-          placeholder="Search students by name, phone, or grade..."
+          placeholder="Search students by name or phone..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           className="pl-10"
@@ -114,17 +112,7 @@ export default function StudentsPage() {
                       <p className="text-sm text-muted-foreground truncate">
                         {student.phone}
                       </p>
-                      {student.grade && (
-                        <Badge variant="secondary" className="mt-2">
-                          {student.grade}
-                        </Badge>
-                      )}
                     </div>
-                  </div>
-                  <div className="mt-4 pt-4 border-t">
-                    <p className="text-sm text-muted-foreground line-clamp-2">
-                      {student.address}
-                    </p>
                   </div>
                 </CardContent>
               </Card>

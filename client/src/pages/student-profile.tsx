@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams, useLocation, Link } from "wouter";
-import { ArrowBack, Phone, LocationOn, School, CalendarMonth, Schedule, Edit } from "@mui/icons-material";
+import { ArrowBack, Phone, CalendarMonth, Schedule, Edit } from "@mui/icons-material";
 import { format } from "date-fns";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -97,11 +97,6 @@ export default function StudentProfile() {
                 </AvatarFallback>
               </Avatar>
               <h2 className="text-2xl font-semibold mb-2">{student.name}</h2>
-              {student.grade && (
-                <Badge variant="secondary" className="mb-4">
-                  {student.grade}
-                </Badge>
-              )}
 
               <div className="w-full space-y-4 mt-6 text-left">
                 <div className="flex items-start gap-3">
@@ -111,22 +106,6 @@ export default function StudentProfile() {
                     <p className="font-medium">{student.phone}</p>
                   </div>
                 </div>
-                <div className="flex items-start gap-3">
-                  <LocationOn sx={{ fontSize: 20 }} className="text-muted-foreground mt-0.5" />
-                  <div>
-                    <p className="text-sm text-muted-foreground">Address</p>
-                    <p className="font-medium">{student.address}</p>
-                  </div>
-                </div>
-                {student.grade && (
-                  <div className="flex items-start gap-3">
-                    <School sx={{ fontSize: 20 }} className="text-muted-foreground mt-0.5" />
-                    <div>
-                      <p className="text-sm text-muted-foreground">Grade</p>
-                      <p className="font-medium">{student.grade}</p>
-                    </div>
-                  </div>
-                )}
               </div>
             </div>
           </CardContent>

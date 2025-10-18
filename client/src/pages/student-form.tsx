@@ -6,7 +6,6 @@ import { ArrowBack, CloudUpload, Close } from "@mui/icons-material";
 import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import {
   Form,
   FormControl,
@@ -39,17 +38,13 @@ export default function StudentForm() {
     resolver: zodResolver(insertStudentSchema),
     defaultValues: {
       name: "",
-      address: "",
       phone: "",
-      grade: "",
       profileImage: "",
     },
     values: student
       ? {
           name: student.name,
-          address: student.address,
           phone: student.phone,
-          grade: student.grade || "",
           profileImage: student.profileImage || "",
         }
       : undefined,
@@ -270,43 +265,6 @@ export default function StudentForm() {
                         <Input
                           placeholder="Enter phone number"
                           data-testid="input-phone"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="grade"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Grade/Class</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="e.g., Grade 10, Class A"
-                          data-testid="input-grade"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="address"
-                  render={({ field }) => (
-                    <FormItem className="md:col-span-2">
-                      <FormLabel>Address *</FormLabel>
-                      <FormControl>
-                        <Textarea
-                          placeholder="Enter complete address"
-                          rows={3}
-                          data-testid="input-address"
                           {...field}
                         />
                       </FormControl>
