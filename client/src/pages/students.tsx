@@ -16,8 +16,7 @@ export default function StudentsPage() {
   });
 
   const filteredStudents = students?.filter((student) =>
-    student.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    student.phone.includes(searchQuery)
+    student.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   if (isLoading) {
@@ -60,7 +59,7 @@ export default function StudentsPage() {
       <div className="relative">
         <Search sx={{ fontSize: 16 }} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
         <Input
-          placeholder="Search students by name or phone..."
+          placeholder="Search students by name..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           className="pl-10"
@@ -109,9 +108,6 @@ export default function StudentsPage() {
                       <h3 className="font-semibold text-lg truncate">
                         {student.name}
                       </h3>
-                      <p className="text-sm text-muted-foreground truncate">
-                        {student.phone}
-                      </p>
                     </div>
                   </div>
                 </CardContent>

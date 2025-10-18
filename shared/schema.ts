@@ -16,7 +16,6 @@ export const admins = pgTable("admins", {
 export const students = pgTable("students", {
   id: serial("id").primaryKey(),
   name: text("name").notNull(),
-  phone: text("phone").notNull(),
   profileImage: text("profile_image"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
@@ -73,7 +72,6 @@ export const insertStudentSchema = createInsertSchema(students).omit({
   createdAt: true,
 }).extend({
   name: z.string().min(2, "Name must be at least 2 characters"),
-  phone: z.string().min(10, "Phone number must be at least 10 digits"),
   profileImage: z.string().optional(),
 });
 

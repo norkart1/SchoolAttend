@@ -38,13 +38,11 @@ export default function StudentForm() {
     resolver: zodResolver(insertStudentSchema),
     defaultValues: {
       name: "",
-      phone: "",
       profileImage: "",
     },
     values: student
       ? {
           name: student.name,
-          phone: student.phone,
           profileImage: student.profileImage || "",
         }
       : undefined,
@@ -247,24 +245,6 @@ export default function StudentForm() {
                         <Input
                           placeholder="Enter student name"
                           data-testid="input-name"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="phone"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Phone Number *</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="Enter phone number"
-                          data-testid="input-phone"
                           {...field}
                         />
                       </FormControl>

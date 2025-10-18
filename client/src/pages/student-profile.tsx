@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams, useLocation, Link } from "wouter";
-import { ArrowBack, Phone, CalendarMonth, Schedule, Edit } from "@mui/icons-material";
+import { ArrowBack, CalendarMonth, Schedule, Edit } from "@mui/icons-material";
 import { format } from "date-fns";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -97,16 +97,6 @@ export default function StudentProfile() {
                 </AvatarFallback>
               </Avatar>
               <h2 className="text-2xl font-semibold mb-2">{student.name}</h2>
-
-              <div className="w-full space-y-4 mt-6 text-left">
-                <div className="flex items-start gap-3">
-                  <Phone sx={{ fontSize: 20 }} className="text-muted-foreground mt-0.5" />
-                  <div>
-                    <p className="text-sm text-muted-foreground">Phone</p>
-                    <p className="font-medium">{student.phone}</p>
-                  </div>
-                </div>
-              </div>
             </div>
           </CardContent>
         </Card>
